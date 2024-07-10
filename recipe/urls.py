@@ -17,21 +17,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from vege.views import *
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('recipe/',recipes,name="recipesssss"),
-    path('delete-recipe/<id>/',delete_recipe,name="delete_recipe"),
-    path('update-recipe/<id>/',update_recipe,name="update_recipe"),
+    path('recipe/', recipes, name="recipes"),
+    path('delete-recipe/<int:id>/', delete_recipe, name="delete_recipe"),
+    path('update-recipe/<int:id>/', update_recipe, name="update_recipe"),
+    path('login/' , login_page, name="login_page"),
+    path('register/' , register, name="register"),
 ]
-    
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 urlpatterns += staticfiles_urlpatterns()
+
 
 
