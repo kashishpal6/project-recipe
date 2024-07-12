@@ -3,10 +3,10 @@ from .models import *
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,login
-
-
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required(login_url="/login/")
 def recipes(request):
     if request.method == "POST":
      data = request.POST
@@ -68,6 +68,11 @@ def login_page(request):
           login(request,user)
           return redirect ('/recipe/')
    return render(request,'login.html')
+def logout_page(request):
+   logout(request)
+   return redirect('/login/')
+
+
 def register(request):
    if request.method== "POST":
       first_name = request.POST.get('first_name')
